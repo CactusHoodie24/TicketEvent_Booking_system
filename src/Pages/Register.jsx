@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { UseAppContext } from './storeContext'
+import { UseAppContext } from '../components/storeContext/storeContext'
 import { Navigate, useNavigation, Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
+import { AiOutlineClose } from 'react-icons/ai';
 
 const Register = () => {
-    const { details, setDetails, error, setError, sucess, setSuccess, setInfo, setToken} = UseAppContext();
+    const { details, setDetails, error, setError, sucess, setSuccess, setInfo, setToken, isClicked, setIsCliked} = UseAppContext();
     const navigate = useNavigate();
     const [blud, setBlud] = useState(false)
 
@@ -13,7 +14,7 @@ const Register = () => {
 
         if(!blud) {
           try {
-            const response = await fetch('http://localhost:5000/register', {
+            const response = await fetch('http://localhost:5000/api/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ const Register = () => {
         }
         } else {
           const fetchTrap = async () => {
-            const rep = await fetch('http://localhost:5000/login', {
+            const rep = await fetch('http://localhost:5000/api/users/login', {
               method: 'POST',
               headers: {
                 'content-type': 'application/json'
@@ -94,7 +95,8 @@ const Register = () => {
 
     return (
         <div>
-            <form className='form-container' onSubmit={handleSubmit}>
+            <form className='form-container relative' onSubmit={handleSubmit}>
+            <AiOutlineClose onClick={() => setIsCliked(false)} className='text-2xl absolute right-5 top-5' />
                 {error ? (
                     <h1>There was an error my guy</h1>
                 ) : sucess ? (

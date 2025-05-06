@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { UseAppContext } from '../storeContext'
+import { UseAppContext } from '../components/storeContext/storeContext'
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate, useParams } from 'react-router-dom';
-import useFetchCartStatus from '../useFetch'
+import useFetchCartStatus from '../components/customHook/useFetch'
 
 
 
-const events = () => {
-    const { events, setEvents, logout, info } = UseAppContext()
+const events = ({shouldShowButton}) => {
+    const { events, setEvents, logout, info} = UseAppContext()
     const { cart } = useFetchCartStatus();
     const baseUrl = 'http://localhost:5000/uploads/';
     const [name, setName] = useState('')
@@ -18,7 +18,7 @@ const events = () => {
     const allCategories = ['all', ...new Set(events.map(event => event.category))]
     const navigate = useNavigate();
     
-
+   console.log(info)
     const search = (e) => {
         setName(e.target.value)
       const filteredItem = events.filter((event) => event.name.includes(e.target.value
@@ -61,7 +61,14 @@ const events = () => {
     <span className="absolute top-0 left-7 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
   )}
 </div>
-    <button className='border-2 border-solid rounded-sm mr-4 w-20 h-8 cursor-pointer absolute top-1 right-0 size-16 ... bg-cyan-500 text-white' onClick={logout}>Logout</button>
+    {(shouldShowButton || info.length !== 0) && (
+  <button
+    className="border-2 border-solid rounded-sm mr-4 w-20 h-8 cursor-pointer absolute top-1 right-0 size-16 bg-cyan-500 text-white"
+    onClick={logout}
+  >
+    Logout
+  </button>
+)}
     <div className='flex-row mb-5'>
     <input className='rounded-sm mr-2 w-40' style={{border: '1px solid black'}} type='text' value={name} onChange={search} placeholder='Search by name' ></input>
     <input className='mr-4 rounded w-40' style={{border: '1px solid black'}} type='date' value={date} onChange={searchDate} ></input>

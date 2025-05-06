@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { UseAppContext } from './storeContext';
+import { UseAppContext } from '../storeContext/storeContext';
 
 const useFetchCartStatus = () => {
   const [cart, setCart] = useState(false);

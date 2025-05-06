@@ -42,3 +42,7 @@
   padding-top: 5px;
   margin-left: 130px;
 }
+
+.btn {
+  @apply cursor-pointer;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { UseAppContext } from '../storeContext';
+import { UseAppContext } from '../components/storeContext/storeContext';
 import axios from 'axios';
 import { FaBeer, FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 

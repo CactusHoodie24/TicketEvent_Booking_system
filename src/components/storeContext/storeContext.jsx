@@ -17,6 +17,7 @@ const StoreContext = ({children}) => {
         const [events, setEvents] = useState([])
         const [tickets, setTickets] = useState([])
         const [cart, setCart] = useState(false);
+        const [isClicked, setIsCliked] = useState(false);
        
     
         useEffect(() => {
@@ -30,7 +31,7 @@ const StoreContext = ({children}) => {
                         return;
                     }
     
-                    const res = await fetch('http://localhost:5000/dashboard', {
+                    const res = await fetch('http://localhost:5000/api/users/dashboard', {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${token}`,
@@ -73,10 +74,10 @@ const StoreContext = ({children}) => {
         const logout = () => {
           localStorage.removeItem('token')
           console.log('Clikcing')
-          window.location.href = '/register';
+          window.location.href = '/';
         }
   return (
-    <GlobalContext.Provider value={{details, info, setDetails, sucess, error, setError, setSuccess, logout, setInfo, setToken, events, setEvents}}>
+    <GlobalContext.Provider value={{details, info, setDetails, sucess, error, setError, setSuccess, logout, setInfo, setToken, events, setEvents, isClicked, setIsCliked}}>
      {children}
     </GlobalContext.Provider>
   )

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { UseAppContext } from "./storeContext";
+import { UseAppContext } from "../storeContext/storeContext";
 
 const ProtectedRoutes = ({ allowedRoles, children }) => {
     const {sucess, info} = UseAppContext();
